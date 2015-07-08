@@ -1,7 +1,18 @@
+/* ...
+ *= require foundation/css/foundation.min.css
+ *= require_self
+ *= require_tree .
+ */
+
 @charset "utf-8";
 
-body {
-  background: #000000;
+body{
+  background-color: #000000;
   text-align: center;
   font-family: sans-serif;
+}
+.dial{
+  width: 350px;
+  height: 350px;
+  background-color: #ffffff;
 }

@@ -1,10 +1,36 @@
 ---
-title: Welcome to Middleman
+title: colorwheelie.com
 ---
 
-<div id="lightbox">
-</div>
-<div id="knob-container">
+<top-bar>
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">colorwheelie.com</a></h1>
+    </li>
+    <li toggle-top-bar class="menu-icon"><a href="#">Menu</a></li>
+  </ul>
+
+  <top-bar-section>
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="active"><a href="#">Active</a></li>
+      <li has-dropdown>
+        <a href="#">Dropdown</a>
+        <ul top-bar-dropdown>
+          <li><a href="#">First link in dropdown</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+      <li><a href="#">Left</a></li>
+    </ul>
+  </top-bar-section>
+</top-bar>
+<div ng-controller="ColorWheelieCtrl">
+  <div id="lightbox">
+  </div>
   <input class="dial" type="text" value="221" data-color="red" data-min="0" data-max="256" data-displayInput="true" data-width="300px" data-fgColor="#ff0000">
   <input class="dial" type="text" value="221" data-color="green" data-min="0" data-max="256" data-displayInput="true" data-width="300px" data-fgColor="#00ff00">
   <input class="dial" type="text" value="221" data-color="blue" data-min="0" data-max="256" data-displayInput="true" data-width="300px" data-fgColor="#0000ff">

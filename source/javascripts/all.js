@@ -1,13 +1,15 @@
 //= require_tree .
 //= require jquery/dist/jquery.min.js
 //= require angular/angular.min.js
+//= require angular-foundation/mm-foundation.min.js
+//= require angular-foundation/mm-foundation-tpls.min.js
 //= require jquery-knob/dist/jquery.knob.min.js
 //= require raphael/raphael-min.js
 //= require toxiclibsjs/build/toxiclibs.min.js
 
-angular.module('colorwheelie', ['mm.foundation']);
-
-window.glColor = [221/255,221/255,221/255];
+angular.module('colorwheelie', ['mm.foundation'])
+.controller('ColorWheelieCtrl', ['$scope', function($scope){
+  $scope.glColor = [221/255,221/255,221/255];
   window.onload = function(){
     var container = document.getElementById("lightbox"),
         columns = 6, rows = 4,
@@ -68,7 +70,7 @@ window.glColor = [221/255,221/255,221/255];
             var distance = pos.distanceTo( box );
             //*&* var color = toxi.color.TColor.newHSV(distance/bounds.width,0.5,1.0);
             // var color = toxi.color.TColor.newRGB(window.glColor);
-            var color = toxi.color.TColor.newRGB(window.glColor);
+            var color = toxi.color.TColor.newRGB($scope.glColor);
             //`TColor#toRGBACSS()` will output the color as a css "rgba()" string
             circle.attr({ fill: color.toRGBACSS(), r: distance*0.25 });
             // *&* circle.attr({ fill: glColor.toRGBACSS(), r: distance*0.25 });
@@ -77,20 +79,17 @@ window.glColor = [221/255,221/255,221/255];
       }
     };
 
-  function updateColor(r, g, b){
-    var color = '#' + parseInt(r).toString(16) + parseInt(g).toString(16) + parseInt(b).toString(16);
-    // $('.circle').css({'fill': color});
-    glColor = color;
-  }
-  $(function() {
+  $(function(){
       $('.dial').knob({
         'change': function(){
           var knobs = {};
           $('.dial').each(function(){
             knobs[$(this).data('color')] = $(this).val();
           });
-          window.glColor = [knobs.red / 255, knobs.green / 255, knobs.blue / 255];
+          $scope.glColor = [knobs.red / 255, knobs.green / 255, knobs.blue / 255];
           // updateColor(knobs.red, knobs.green, knobs.blue);
         }
     });
   });
+
+}])
