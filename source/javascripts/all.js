@@ -45,10 +45,10 @@ angular.module('colorwheelie', ['mm.foundation'])
         }
         return circles;
     }());
-    //track the mouse position
+    // track the mouse position
     document.addEventListener( "mousemove", function(event){
         pos.set( event.pageX, event.pageY );
-        update();
+        // update();
     },false);
     //track the first finger on any touch-device
     document.addEventListener( "touchmove", function(event){
@@ -57,28 +57,18 @@ angular.module('colorwheelie', ['mm.foundation'])
         if( pos.isInRectangle(bounds) ){
             event.preventDefault();
         }
-        update();
+        // update();
     },false);
 
     function update(){
         var i = 0, l = circles.length;
         for( i=0; i<l; i++ ){
             var circle = circles[i];
-            //get the bounding box from raphael
             var box = circle.getBBox();
-            //raphael's box has `x` and `y` properties, we can use it directly with toxiclibs.js
-            var distance = pos.distanceTo( box );
-            //*&* var color = toxi.color.TColor.newHSV(distance/bounds.width,0.5,1.0);
-            // var color = toxi.color.TColor.newRGB(window.glColor);
             var color = toxi.color.TColor.newRGB($scope.glColor);
-            //`TColor#toRGBACSS()` will output the color as a css "rgba()" string
-            circle.attr({ fill: color.toRGBACSS(), r: distance*0.25 });
-            // *&* circle.attr({ fill: glColor.toRGBACSS(), r: distance*0.25 });
-
+            circle.attr({ fill: color.toRGBACSS() });
         }
       }
-    };
-
   $(function(){
       $('.dial').knob({
         'change': function(){
@@ -87,9 +77,11 @@ angular.module('colorwheelie', ['mm.foundation'])
             knobs[$(this).data('color')] = $(this).val();
           });
           $scope.glColor = [knobs.red / 255, knobs.green / 255, knobs.blue / 255];
-          // updateColor(knobs.red, knobs.green, knobs.blue);
+          update();
         }
     });
   });
+    };
+
 
 }])
