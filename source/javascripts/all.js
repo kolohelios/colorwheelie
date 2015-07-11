@@ -6,11 +6,17 @@
 //= require jquery-knob/dist/jquery.knob.min.js
 //= require raphael/raphael-min.js
 //= require toxiclibsjs/build/toxiclibs.min.js
+//= require angular-ui-router/release/angular-ui-router.min.js
 
-angular.module('colorwheelie', ['mm.foundation'])
+angular.module('colorwheelie', ['mm.foundation', 'ui.router'])
+.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
+  $urlRouterProvider.otherwise('/');
+  $stateProvider
+  .state('home', {url: '/', templateUrl: 'home.html', controller: 'ColorWheelieCtrl'})
+  .state('about', {url: '/about', templateUrl: 'about.html'});
+}])
 .controller('ColorWheelieCtrl', ['$scope', function($scope){
   $scope.glColor = [221/255,221/255,221/255];
-  window.onload = function(){
     var container = document.getElementById("lightbox"),
         columns = 6, rows = 4,
         bounds,
@@ -79,9 +85,6 @@ angular.module('colorwheelie', ['mm.foundation'])
           $scope.glColor = [knobs.red / 255, knobs.green / 255, knobs.blue / 255];
           update();
         }
+      });
     });
-  });
-    };
-
-
-}])
+}]);
